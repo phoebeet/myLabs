@@ -32,4 +32,4 @@ git diff = show the local changes
 git add (FILE NAME) = stage your local change for commit
 git commit = COMMIT!!!
 git push (REMOTE) (LOCAL BRANCH):(REMOTE BRANCH)
-
+git branch = show da branch you're on
