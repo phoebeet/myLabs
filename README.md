@@ -14,6 +14,7 @@ listing all properties = ls -l
 listing all properties and hidden files = ls -la
 listing in order by time = ls -lrt
 remove folder = rm -rf (foldername)
+move folders = mv (filename) (destination)
 
 vim:
 editing = i OR a
