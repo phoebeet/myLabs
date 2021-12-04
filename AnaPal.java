@@ -4,25 +4,45 @@ import java.util.Scanner;
 class AnaPal {
   static Scanner in = new Scanner(System.in);
 
-  public static void main(String[] args) {
+  public static int getAnInt()
+  {
+    int retval = 0;
+    boolean done = false;
+    String dummy;
+    while(!done){
+      System.out.println("Enter an integer:");
+      if(in.hasNextInt()){
+        done = true;
+        retval = in.nextInt();
+      } else {
+        System.out.println("Integer values only, please re-enter a valid input: ");
+        dummy = in.next();
+      }
+    }//while
+    return retval;
+  }//getAnInt
 
+  public static void main(String[] args)
+  {
     int inputnum = -1;
 
     while(inputnum != 0) {
-      System.out.println("Anagram or Palindrome Test?");
+      System.out.println("Anagram or Palindrome Test");
       System.out.println("0: Quit the program");
       System.out.println("1: Anagram Test");
       System.out.println("2: Palindrome Test");
       System.out.println();
 
-      inputnum = in.nextInt();
+      inputnum = getAnInt();
 
-      switch (inputnum){
+      switch (inputnum) {
         case 0:
-	  break;
-        case 1: Anagram();
           break;
-        case 2: Palindrome();
+        case 1:
+          Anagram();
+          break;
+        case 2:
+          Palindrome();
           break;
         default:
           System.out.println("Illegal value entered");
@@ -30,7 +50,8 @@ class AnaPal {
     }
   }
 
-  public static void Anagram(){
+  public static void Anagram()
+  {
     System.out.println("Please type a string.");
     in.nextLine();
     String a = in.nextLine();
@@ -61,7 +82,6 @@ class AnaPal {
       }
 
     }
-
   }
 
   public static void Palindrome()
@@ -72,7 +92,7 @@ class AnaPal {
     String d = "";
     char ch;
 
-    for (int x = 0; x < c.length(); x++) {
+    for (int x = 0; x < c.length(); x++){
       ch = c.charAt(x);
       d = ch + d;
     }
@@ -83,9 +103,7 @@ class AnaPal {
       System.out.println("Not a palindrome.");
   }
 
-
-  public static void swap(char[] a, int i, int j)
-  {
+  public static void swap(char[] a, int i, int j){
     char temp = a[i];
     a[i] = a[j];
     a[j] = temp;
@@ -93,8 +111,7 @@ class AnaPal {
 
   private static class Bubblesort {
 
-    private static void bubblesort(char[] a)
-    {
+    private static void bubblesort(char[] a) {
       for (int i = 0; i < a.length; i++) {
         for (int j = i+1; j < a.length; j++) {
           if (a[j] < a[i])
