@@ -13,21 +13,24 @@ class Rot {
   }
 
   
-  public static String Rot13 (String a, int n) {
+ public static String Rot13 (String s, int n) {
+    char c;
+    char a = 'a';
     StringBuilder sb = new StringBuilder();
-    for (int i = 0; i < a.length(); i++) {
-      char c = a.charAt(i);
-      if (c >= 'a' && c <= 'm') 
-        c += n%26;
-      else if (c >= 'A' && c <= 'M') 
-        c += n%26;
-      else if (c >= 'n' && c <= 'z') 
-        c -= n%26;
-      else if (c >= 'N' && c <= 'Z') 
-        c -= n%26;
+
+    for (int i = 0; i < s.length(); i++) {
+      c = s.charAt(i);
+      if (c < 'A' || c > 'z' || (c > 'Z' && c < 'a')) {
+        sb.append(c);
+        continue;
+      }
+
+      if (c >= 'A' && c <= 'Z')
+        a = 'A';
+
+      c = (char) (a + (((c - a) + n) % 26));
       sb.append(c);
     }
     return sb.toString();
   }
-  
 }
