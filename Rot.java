@@ -14,8 +14,7 @@ class Rot {
 
   
  public static String Rot13 (String s, int n) {
-    char c;
-    char a = 'a';
+    char a, c;
     StringBuilder sb = new StringBuilder();
 
     for (int i = 0; i < s.length(); i++) {
@@ -27,6 +26,8 @@ class Rot {
 
       if (c >= 'A' && c <= 'Z')
         a = 'A';
+      else
+        a = 'a';
 
       c = (char) (a + (((c - a) + n) % 26));
       sb.append(c);
