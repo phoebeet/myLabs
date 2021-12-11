@@ -28,7 +28,7 @@ class WrittenOut {
     numbers[18] = "eighteen";
     numbers[19] = "nineteen";
 
-    String[] tens = new String[9];
+    String[] tens = new String[8];
     tens[0] = "twenty";
     tens[1] = "thirty";
     tens[2] = "fourty";
@@ -41,21 +41,34 @@ class WrittenOut {
 
     System.out.println("Please input a number you would like to write out");
     int n = in.nextInt();
-    String written;
-
-    if (n % 100 < 20){
-      written = numbers[n%100];
-      n /= 100;
-    } else {
-      written = numbers[n%10];
-      n /= 10;
-      written = tens[n%10 - 2] + written;
-      n /= 10;
-    }
+    int u, t, h;
+    String written = "";
 
     if (n == 0)
       System.out.println(numbers[0]);
-    
-    System.out.println(numbers[n] + " hundred " + written);
+    else {
+      u = n % 10;
+      t = (n / 10) % 10;
+      h = n / 100;
+      if (h != 0)
+        written = numbers[h] + " hundred ";
+      if (t != 0) {
+        if (t != 1) {
+          written += tens[t -2];
+          if (u != 0)
+            written += (" " + numbers[u]);
+	} else {
+          written += numbers[t * 10 + u];
+        }
+      } else {
+        if (h != 0) {
+          if (u != 0)
+            written += ("and " + numbers[u]);
+	} else if (h == 0)
+          written = numbers[u];
+      }
+
+      System.out.println(written);
+    }
   }
 }
