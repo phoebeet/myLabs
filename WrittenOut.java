@@ -3,9 +3,7 @@ import java.util.Scanner;
 class WrittenOut {
   static Scanner in =  new Scanner(System.in);
 
-  public static void main(String[] args) {
-
-
+  public static void num2words(int n) {
     String[] numbers = new String[20];
     numbers[0] = "zero";
     numbers[1] = "one";
@@ -38,14 +36,13 @@ class WrittenOut {
     tens[6] = "eighty";
     tens[7] = "ninety";
 
-
-    System.out.println("Please input a number you would like to write out");
-    int n = in.nextInt();
     int u, t, h;
     String written = "";
 
     if (n == 0)
       System.out.println(numbers[0]);
+    else if (n > 999 || n < 0)
+      System.out.println("Only support numbers from 0 up to 999");
     else {
       u = n % 10;
       t = (n / 10) % 10;
@@ -54,7 +51,7 @@ class WrittenOut {
         written = numbers[h] + " hundred ";
       if (t != 0) {
         if (t != 1) {
-          written += tens[t -2];
+          written += tens[t - 2];
           if (u != 0)
             written += (" " + numbers[u]);
 	} else {
@@ -70,5 +67,84 @@ class WrittenOut {
 
       System.out.println(written);
     }
+  }
+
+  public static void num2roman(int n) {
+    int u, t, h;
+    String written = "";
+
+    if (n == 0)
+      System.out.println("Zero is not defined in roman numerals");
+    else if (n > 999 || n < 0)
+      System.out.println("Only support numbers from 0 up to 999");
+    else {
+      u = n % 10;
+      t = (n / 10) % 10;
+      h = n / 100;
+
+      if (h != 0) {
+        if (h < 4) {
+          for (int i = 0; i < h; i++)
+            written += "C";
+        } else if (h == 4) {
+          written = "CD";
+	} else if (h == 9) {
+          written = "CM";
+	} else {
+          written = "D";
+          for (int i = 5; i < h; i++)
+            written += "C";
+        }
+      }
+      if (t != 0) {
+        if (t < 4) {
+          for (int i = 0; i < t; i++)
+            written += "X";
+        } else if (t == 4) {
+          written += "XL";
+        } else if (t == 9) {
+          written += "XC";
+        } else {
+          written += "L";
+          for (int i = 5; i < t; i++)
+            written += "X";
+        }
+      }
+      if (u != 0) {
+        if (u < 4) {
+          for (int i = 0; i < u; i++)
+            written += "I";
+        } else if (u == 4) {
+          written += "IV";
+        } else if (u == 9) {
+           written += "IX";
+        } else {
+          written += "V";
+          for (int i = 5; i < u; i++)
+            written += "I";
+        }
+      }
+
+      System.out.println(written);
+    }
+  }
+
+  public static void main(String[] args) {
+    int n, num;
+
+    System.out.println("Please input a number you would like to write out");
+    num = in.nextInt();
+
+    System.out.println("Please select output format:");
+    System.out.println("1. English words");
+    System.out.println("2. Roman numerals");
+    n = in.nextInt();
+
+    if (n == 1)
+      num2words(num);
+    else if (n == 2)
+      num2roman(num);
+    else
+      System.out.println("Format not supported");
   }
 }
