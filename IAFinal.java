@@ -14,6 +14,10 @@ import javafx.geometry.*;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font; 
+import javafx.scene.text.FontPosture; 
+import javafx.scene.text.FontWeight; 
+import javafx.scene.text.Text;
 
 //Defining classes in the game
 
@@ -113,9 +117,11 @@ public class IAFinal extends Application {
 
 		Label desc = new Label();
 		desc.setWrapText(true);
+		desc.setFont(Font.font("Arial", FontWeight.NORMAL, FontPosture.REGULAR, 20));
 		desc.setText("Would you like to start the game?");
 		
 		Button next = new Button();
+		next.setFont(Font.font("Arial", FontWeight.NORMAL, FontPosture.REGULAR, 20));
 		next.setText("Begin my day");
 		
 		next.setOnAction(new EventHandler<ActionEvent>() {
@@ -131,6 +137,7 @@ public class IAFinal extends Application {
 					for (int i = 0; i < stage.nChoices; i++) {
 						Label comment = new Label();
 						comment.setWrapText(true);
+						comment.setFont(Font.font("Cambria", FontWeight.BOLD, FontPosture.ITALIC, 20));
 						comment.setText(stage.tChoices[i] + ": " + stage.tComments[i]);
 						vbox.getChildren().add(comment);
 						stage.cb.getItems().add(stage.tChoices[i]);
@@ -148,9 +155,10 @@ public class IAFinal extends Application {
 						else
 							points2++;
 					}
-					if (points2 > 5) {
+					System.out.println("points1 = " + points1 + ", " + "points2 = " + points2);
+					if (points2 >= 5) {
 						desc.setText("You're ready to wind down and fall asleep, but you hear footsteps coming from outside your bedroom. Your mother enters the bedroom, face red in anger. She's angry about the lack of effort you put into your day. You become defensive, wanting to argue against her screaming, but also knowing that she's right. Sometimes, days aren't great. But you know that everyone has to deal with problems. And that nobody ever gets everything they want, even if they deserve better than the treatment they get. The only thing you can do is try to make tomorrow better. You go to sleep. You can make tomorrow better than today. ");
-					} else if (points1 == 5) {
+					} else if (points1 >= 5) {
 						desc.setText("You get into bed, ready for the next day. It's not even midnight yet - a good start to cleaning up your sleep schedule for tomorrow. Hopefully, you'll wake up on time again. There are always bad days, but sometimes, there are good days too. But you don't just wait for the good days to happen by chance - you make them good days. You're proud of yourself today. You go to sleep. You can make tomorrow even better than today.");
 					} else {
 						desc.setText("You get into bed. You wonder if you worked hard enough today, if you improved at all. You think about the AP and IB tests you have to deal with in a few weeks, and the pile of IAs you still have to write. You think about the college applications weighing down on you. A small part of you wants to just sleep forever and give up on it all. But you remind yourself that while growth is painful, nothing is as painful as regret. Folding in on yourself because of some hard times is a recipe for failure. You go to sleep. You can make tomorrow better than today.");
@@ -162,7 +170,7 @@ public class IAFinal extends Application {
 
 		vbox.getChildren().addAll(desc, next);
 
-		Scene scene = new Scene(vbox, 700, 650);
+		Scene scene = new Scene(vbox, 800, 400);
 		primaryStage.setTitle("Day in Life: Text-Based Game");
 		primaryStage.setScene(scene);
 		primaryStage.show();
