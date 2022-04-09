@@ -129,6 +129,10 @@ public class IAFinal extends Application {
 					desc.setText(stage.tDescription);
 					vbox.getChildren().add(desc);
 					for (int i = 0; i < stage.nChoices; i++) {
+						Label comment = new Label();
+						comment.setWrapText(true);
+						comment.setText(stage.tChoices[i] + ": " + stage.tComments[i]);
+						vbox.getChildren().add(comment);
 						stage.cb.getItems().add(stage.tChoices[i]);
 					}
 					stage.cb.setValue(stage.tChoices[0]);
