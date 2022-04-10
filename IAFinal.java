@@ -101,6 +101,12 @@ class Day {
 	public void SetCurrentIndex(int id) {
 		index = id;
 	}
+	
+	public StageOfTheDay GetStage(int id) {
+		if (id >= lStages.size())
+			id = 0;
+		return lStages.get(id);
+	}
 }
 
  
@@ -115,6 +121,10 @@ public class IAFinal extends Application {
 
 		VBox vbox = new VBox(10);
 
+		Label comment = new Label();
+		comment.setWrapText(true);
+		comment.setFont(Font.font("Cambria", FontWeight.BOLD, FontPosture.ITALIC, 20));
+		
 		Label desc = new Label();
 		desc.setWrapText(true);
 		desc.setFont(Font.font("Arial", FontWeight.NORMAL, FontPosture.REGULAR, 20));
@@ -128,20 +138,15 @@ public class IAFinal extends Application {
  
 			@Override
 			public void handle(ActionEvent event) {
+				int cid = myDay.GetCurrentIndex();
 				vbox.getChildren().clear();
-				if (myDay.GetCurrentIndex() < myDay.lStages.size()) {
+				if (cid < myDay.lStages.size()) {
 					StageOfTheDay stage = myDay.GetNextStage();
 
 					desc.setText(stage.tDescription);
 					vbox.getChildren().add(desc);
-					for (int i = 0; i < stage.nChoices; i++) {
-						Label comment = new Label();
-						comment.setWrapText(true);
-						comment.setFont(Font.font("Cambria", FontWeight.BOLD, FontPosture.ITALIC, 20));
-						comment.setText(stage.tChoices[i] + ": " + stage.tComments[i]);
-						vbox.getChildren().add(comment);
+					for (int i = 0; i < stage.nChoices; i++)
 						stage.cb.getItems().add(stage.tChoices[i]);
-					}
 					stage.cb.setValue(stage.tChoices[0]);
 					vbox.getChildren().add(stage.cb);
 					next.setText("Next");
@@ -164,6 +169,16 @@ public class IAFinal extends Application {
 						desc.setText("You get into bed. You wonder if you worked hard enough today, if you improved at all. You think about the AP and IB tests you have to deal with in a few weeks, and the pile of IAs you still have to write. You think about the college applications weighing down on you. A small part of you wants to just sleep forever and give up on it all. But you remind yourself that while growth is painful, nothing is as painful as regret. Folding in on yourself because of some hard times is a recipe for failure. You go to sleep. You can make tomorrow better than today.");
 					}
 					vbox.getChildren().add(desc);
+				}
+				if (cid >=1) {
+					String c = new String();
+					for (int i = 0; i < cid; i++) {
+						StageOfTheDay stage = myDay.GetStage(i);
+						int sel = stage.Selected();
+						c += stage.tChoices[sel - 1] + ": " + stage.tComments[sel - 1] + "\r\n";
+					}
+					comment.setText(c);
+					vbox.getChildren().add(comment);
 				}
 			}
 		});
