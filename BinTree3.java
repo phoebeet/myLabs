@@ -29,6 +29,16 @@ class Node {
 		right_child = r;
 	}
 
+	public void in_order() {
+		if (left_child != null)
+			left_child.in_order();
+
+		System.out.println(value);
+
+		if (right_child != null)
+			right_child.in_order();
+	}
+
 	public void add(int v) {
 		if (v < value) {
 			if (left_child == null)
@@ -54,18 +64,17 @@ class Node {
 
 }
 
-class BinTree2 {
+class BinTree3 {
 	public static void main(String[] args) {
-		Node root = new Node(1);
-		root.add(2);
+		Node root = new Node(5);
 		root.add(3);
+		root.add(2);
 		root.add(4);
-		root.add(5);
-		root.add(6);
 		root.add(7);
-		root.add(8);
+		root.add(6);
 		root.add(9);
+		root.add(8);
 		root.add(10);
-		root.print(1, "");
+		root.in_order();
 	}
 }
